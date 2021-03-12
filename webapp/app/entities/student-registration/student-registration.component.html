@@ -1,0 +1,98 @@
+<div class="card">
+    <div class="card-header">
+        <h2 id="page-heading">
+            <button class="btn btn-primary float-right jh-create-entity create-bank"
+                    [routerLink]="['/banks/new']">
+                <fa-icon icon="plus"></fa-icon>
+                <span class="hidden-sm-down">
+                    New Bank
+                </span>
+            </button>
+        </h2>
+        <form *ngIf="!currentSearch && data?.length > 0" class="navbar-form float-left">
+            <div class="input-group no-border">
+                <button mat-raised-button type="submit" (click)="openSearchFilter()"
+                        class="btn btn-white btn-round btn-just-icon">
+                    <i class="material-icons">search</i>
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="card-body">
+
+        <efo-search [entity]="this" [currentSearch]="currentSearch" [code]="true" [name]="true" [shortName]="true"
+                    [enable]="true"></efo-search>
+
+        <efo-alert-error></efo-alert-error>
+        <efo-alert></efo-alert>
+
+        <div class="alert alert-warning" id="no-result" *ngIf="data?.length === 0">
+            <span>No Banks found</span>
+        </div>
+
+        <div class="table-responsive" id="entities" *ngIf="data?.length > 0">
+            <table class="table table-striped" aria-describedby="page-heading">
+                <thead>
+                <tr efoSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col" efoSortBy="code"><span>Code</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" efoSortBy="name"><span>Name</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" efoSortBy="shortName"><span>Short Name</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" efoSortBy="enable"><span>Enabled</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" efoSortBy="status"><span>Status</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let bank of data;">
+                    <td>{{ bank.code }}</td>
+                    <td>{{ bank.name }}</td>
+                    <td>{{ bank.shortName }}</td>
+                    <td><span
+                            [class]="bank.enable ? 'badge badge-success':'badge badge-danger'">{{bank.enable ? 'YES' : 'NO'}}</span>
+                    </td>
+                    <td>
+                        <span [class]="bank.status === 'WAITING_VERIFICATION' ? 'badge badge-warning' :
+                            bank.status === 'ACTIVE' ? 'badge badge-success' :
+                            bank.status === 'WAITING_REPAIR' ? 'badge badge-primary': 'badge badge-danger'">
+                            {{ bank.status }}
+                        </span>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/banks', bank.uuid, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="data?.length > 0">
+            <div class="row justify-content-center">
+                <efo-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></efo-item-count>
+            </div>
+
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage"
+                                [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                                (pageChange)="loadPage($event)"></ngb-pagination>
+            </div>
+        </div>
+    </div>
+
+</div>

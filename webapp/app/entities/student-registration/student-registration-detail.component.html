@@ -1,0 +1,73 @@
+<div class="col-8 card" *ngIf="bankModel">
+    <div class="card-header card-header-primary">
+        <h3><span>Detail</span></h3>
+    </div>
+    <div class="card-body">
+        <efo-alert-error></efo-alert-error>
+
+        <div id="entity-detail">
+            <dl class="row-md">
+
+                <div class="row">
+                    <dt class="col-md-3"><span><strong>Code</strong></span>
+                    </dt>
+                    <dd class="col-md-8"><span>{{bankModel.code}}</span></dd>
+                </div>
+
+                <div class="row">
+                    <dt class="col-md-3"><span><strong>Name</strong></span></dt>
+                    <dd class="col-md-8"><span>{{bankModel.name}}</span></dd>
+                </div>
+
+                <div class="row">
+                    <dt class="col-md-3"><span><strong>Short Name</strong></span></dt>
+                    <dd class="col-md-8"><span>{{bankModel.shortName}}</span></dd>
+                </div>
+
+
+                <div class="row">
+                    <dt class="col-md-3"><span><strong>Enabled</strong></span></dt>
+                    <dd class="col-md-8"><span
+                            [class]="bankModel.enable ? 'badge badge-success' : 'badge badge-danger'">{{bankModel.enable ? 'YES' : 'NO'}}</span>
+                    </dd>
+                </div>
+
+                <div class="row">
+                    <dt class="col-md-3"><strong>Status</strong></dt>
+                    <dd class="col-md-8">
+                        <span [class]="bankModel.status === 'WAITING_VERIFICATION' ? 'badge badge-warning' :
+                                bankModel.status === 'ACTIVE' ? 'badge badge-success' :
+                                bankModel.status === 'WAITING_REPAIR' ? 'badge badge-primary': 'badge badge-danger'">
+                                {{ bankModel.status }}
+                            </span>
+                    </dd>
+                </div>
+            </dl>
+
+            <button type="submit" (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>
+                <span>Back</span>
+            </button>
+
+            <button (click)="edit(bankModel)" *ngIf="available(bankModel.availableActions, 'DATAENTRYACCEPT')"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span>Edit</span>
+            </button>
+
+            <button (click)="repair(bankModel)" *ngIf="available(bankModel.availableActions, 'REPAIR')"
+                    class="btn btn-default">
+                <fa-icon icon="ban"></fa-icon>
+                <span>Repair</span>
+            </button>
+
+            <button (click)="approve(bankModel)" *ngIf="available(bankModel.availableActions, 'APPROVE')"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span>Approve</span>
+            </button>
+        </div>
+    </div>
+
+</div>

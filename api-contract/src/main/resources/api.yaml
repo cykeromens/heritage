@@ -1,0 +1,233 @@
+openapi: "3.0.0"
+#servers:
+#    -   url: http://localhost:8080
+info:
+  description: Heritage service API
+  version: "1.0.0"
+  title: Heritage service API
+paths:
+  /subjects:
+    post:
+      tags:
+      - Subject
+      operationId: subjectRequest
+      summary: Create a subject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components/subject.yaml#/components/schemas/SubjectRequest'
+
+      responses:
+        '200':
+          description: created ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/subject.yaml#/components/schemas/SubjectResponse'
+    get:
+      tags:
+      - Subject
+      operationId: getSubjects
+      summary: Get Subjects
+      parameters:
+      - name: filterRequest
+        in: query
+        schema:
+          $ref: './components/subject.yaml#/components/schemas/SubjectFilterRequest'
+      - name: pageable
+        in: query
+        schema:
+          $ref: './commons/common.yaml#/components/schemas/PageableModel'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/subject.yaml#/components/schemas/SubjectResponsePage'
+
+  /subjects/{uuid}:
+    get:
+      tags:
+      - Subject
+      operationId: getSubjectByUuid
+      summary: Get Subject by UUID
+      parameters:
+      - name: uuid
+        in: path
+        description: Subject UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/subject.yaml#/components/schemas/SubjectResponse'
+
+    put:
+      tags:
+      - Subject
+      operationId: editSubject
+      summary: Repair Subject
+      parameters:
+      - name: uuid
+        in: path
+        description: Subject UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components/subject.yaml#/components/schemas/SubjectRequest'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/subject.yaml#/components/schemas/SubjectResponse'
+
+  /subjects/{uuid}/{action}:
+    post:
+      tags:
+      - Subject
+      summary: Verify Subject action
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+          pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+      - name: action
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/subject.yaml#/components/schemas/SubjectResponse'
+
+  /student-registrations:
+    post:
+      tags:
+      - student-registration
+      operationId: studentRegistrationRequest
+      summary: student registration request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components/student-registration.yaml#/components/schemas/StudentRegistrationRequest'
+
+      responses:
+        '200':
+          description: created ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/student-registration.yaml#/components/schemas/StudentRegistrationResponse'
+    get:
+      operationId: getStudentRegistration
+      summary: Get Subjects
+      parameters:
+      - name: filterRequest
+        in: query
+        schema:
+          $ref: './components/student-registration.yaml#/components/schemas/StudentRegistrationFilterRequest'
+      - name: pageable
+        in: query
+        schema:
+          $ref: './commons/common.yaml#/components/schemas/PageableModel'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/student-registration.yaml#/components/schemas/StudentRegistrationResponsePage'
+
+  /student-registrations/{uuid}:
+    get:
+      tags:
+      - student-registration
+      operationId: getStudentRegistrationByUuid
+      summary: Get Subject by UUID
+      parameters:
+      - name: uuid
+        in: path
+        description: Subject UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/student-registration.yaml#/components/schemas/StudentRegistrationResponse'
+
+    put:
+      tags:
+      - student-registration
+      operationId: editStudentRegistration
+      summary: Repair Subject
+      parameters:
+      - name: uuid
+        in: path
+        description: Subject UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components/student-registration.yaml#/components/schemas/StudentRegistrationRequest'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/student-registration.yaml#/components/schemas/StudentRegistrationResponse'
+
+  /student-registrations/{uuid}/{action}:
+    post:
+      tags:
+      - student-registration
+      operationId: verifyAction
+      summary: Verify Subject action
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+          pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+      - name: action
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/student-registration.yaml#/components/schemas/StudentRegistrationResponse'
+

@@ -1,0 +1,21 @@
+<div [ngSwitch]="isHomePage">
+    <div *ngSwitchCase="false">
+        <router-outlet></router-outlet>
+    </div>
+    <div *ngSwitchCase="true" class="wrapper">
+        <div class="sidebar" data-color="danger" data-background-color="white"
+             data-image="content/images/sidebar/sidebar-1.jpg">
+            <efo-sidebar></efo-sidebar>
+            <div class="sidebar-background"></div>
+        </div>
+        <div class="main-panel">
+            <router-outlet name="navbar"></router-outlet>
+            <div class="main-content">
+                <div class="container-fluid">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+            <efo-footer></efo-footer>
+        </div>
+    </div>
+</div>

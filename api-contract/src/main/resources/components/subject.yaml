@@ -1,0 +1,76 @@
+components:
+  schemas:
+    SubjectRequest:
+      title: SubjectRequest
+      type: object
+      properties:
+        code:
+          type: string
+          minLength: 1
+        name:
+          type: string
+          minLength: 1
+        shortName:
+          type: string
+          minLength: 1
+        enable:
+          type: boolean
+      required:
+      - code
+      - name
+      - shortName
+      - enable
+
+    SubjectResponse:
+      title: SubjectResponse
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        shortName:
+          type: string
+        uuid:
+          type: string
+        availableActions:
+          type: array
+          items:
+            $ref: '../commons/common.yaml#/components/schemas/WorkflowActionResponse'
+        href:
+          type: string
+        status:
+          type: string
+        enable:
+          type: boolean
+
+    SubjectResponsePage:
+      title: SubjectResponsePage
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubjectResponse'
+        pageInfo:
+          $ref: '../commons/common.yaml#/components/schemas/PageModel'
+
+    SubjectFilterRequest:
+      title: SubjectFilterRequest
+      type: object
+      properties:
+        code:
+          type: string
+          minLength: 1
+        name:
+          type: string
+          minLength: 1
+        shortName:
+          type: string
+          minLength: 1
+        uuid:
+          type: string
+        status:
+          type: string
+        enable:
+          type: boolean

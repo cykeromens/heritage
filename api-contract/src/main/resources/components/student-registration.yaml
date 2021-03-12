@@ -1,0 +1,102 @@
+components:
+  schemas:
+    StudentRegistrationRequest:
+      title: StudentRegistrationRequest
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        bioData:
+          $ref: '../commons/common.yaml#/components/schemas/BioData'
+        schoolsAttended:
+          type: array
+          items:
+            $ref: '../commons/common.yaml#/components/schemas/School'
+        jambSubjects:
+          type: array
+          items:
+            $ref: '../commons/common.yaml#/components/schemas/Subject'
+        intendingCourses:
+          type: array
+          items:
+            $ref: '../commons/common.yaml#/components/schemas/Course'
+
+      required:
+      - bioData
+      - education
+      - jambSubjects
+      - schoolsAttended
+      - coursesToStudy
+
+    StudentRegistrationResponse:
+      title: StudentRegistrationResponse
+      type: object
+      properties:
+        bioData:
+          $ref: '../commons/common.yaml#/components/schemas/BioData'
+        schoolsAttended:
+          type: array
+          items:
+            $ref: '../commons/common.yaml#/components/schemas/School'
+        jambSubjects:
+          type: array
+          items:
+            $ref: '../commons/common.yaml#/components/schemas/Subject'
+        intendingCourses:
+          type: array
+          items:
+            $ref: '../commons/common.yaml#/components/schemas/Course'
+        uuid:
+          type: string
+        availableActions:
+          type: array
+          items:
+            $ref: '../commons/common.yaml#/components/schemas/WorkflowActionResponse'
+        href:
+          type: string
+        status:
+          type: string
+        enabled:
+          type: boolean
+
+    StudentRegistrationResponsePage:
+      title: StudentRegistrationResponsePage
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/StudentRegistrationResponse'
+        pageInfo:
+          $ref: '../commons/common.yaml#/components/schemas/PageModel'
+
+    StudentRegistrationFilterRequest:
+      title: StudentRegistrationFilterRequest
+      type: object
+      properties:
+        bioData:
+          $ref: '../commons/common.yaml#/components/schemas/BioData'
+        subjects:
+          type: array
+          items:
+            $ref: './subject.yaml#/components/schemas/SubjectResponse'
+        schoolsAttended:
+          type: array
+          items:
+            $ref: './subject.yaml#/components/schemas/SubjectResponse'
+        coursesToStudy:
+          type: array
+          items:
+            $ref: '../commons/common.yaml#/components/schemas/Course'
+        uuid:
+          type: string
+        status:
+          type: string
+        enable:
+          type: boolean
