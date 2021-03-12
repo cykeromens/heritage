@@ -1,0 +1,180 @@
+<div class="card" *ngIf="currentSearch">
+    <div class="card-body">
+        <form name="editForm" role="form" novalidate>
+            <div class="row">
+                <div class="col-md-2 form-group" *ngIf="code">
+                    <label class="form-control-label" for="field_code">Code</label>
+                    <input type="text" id="field_code" name="code" class="form-control"
+                           [(ngModel)]="entity.filter.code">
+                </div>
+                <div class="col-md-2 form-group" *ngIf="desc">
+                    <label class="form-control-label" for="field_desc">Description </label>
+                    <input type="text" id="field_desc" name="desc" class="form-control"
+                           [(ngModel)]="entity.filter.desc">
+                </div>
+                <div class="col-md-2 form-group" *ngIf="description">
+                    <label class="form-control-label" for="field_description">Description </label>
+                    <input type="text" id="field_description" name="description" class="form-control"
+                           [(ngModel)]="entity.filter.description">
+                </div>
+                <div class="col-md-2 form-group" *ngIf="isoCode">
+                    <label class="form-control-label" for="field_isoCode">Iso Code </label>
+                    <input type="text" id="field_isoCode" name="isoCode" class="form-control"
+                           [(ngModel)]="entity.filter.isoCode">
+                </div>
+                <div class="col-md-2 form-group" *ngIf="userId">
+                    <label class="form-control-label" for="field_userId">User Id</label>
+                    <input type="text" id="field_userId" name="userId" class="form-control"
+                           [(ngModel)]="entity.filter.userId">
+                </div>
+                <div class="col-md-2 form-group" *ngIf="contactName">
+                    <label class="form-control-label" for="field_contactName">Contact Name </label>
+                    <input type="text" id="field_contactName" name="contactName" class="form-control"
+                           [(ngModel)]="entity.filter.contactName">
+                </div>
+                <div class="col-md-2 form-group" *ngIf="contactName">
+                    <label class="form-control-label" for="field_arabicDesc">Arabic</label>
+                    <input type="text" id="field_arabicDesc" name="arabicDesc" class="form-control"
+                           [(ngModel)]="entity.filter.arabicDesc">
+                </div>
+                <div class="col-md-2 form-group" *ngIf="englishDesc">
+                    <label class="form-control-label" for="field_englishDesc">English</label>
+                    <input type="text" id="field_englishDesc" name="englishDesc" class="form-control"
+                           [(ngModel)]="entity.filter.englishDesc">
+                </div>
+                <div class="col-md-2 form-group" *ngIf="email">
+                    <label class="form-control-label" for="field_email">Email </label>
+                    <input type="text" id="field_email" name="email" class="form-control"
+                           [(ngModel)]="entity.filter.email">
+                </div>
+                <div class="col-md-2 form-group" *ngIf="mobile">
+                    <label class="form-control-label" for="field_mobile">Mobile </label>
+                    <input type="text" id="field_mobile" name="mobile" class="form-control"
+                           [(ngModel)]="entity.filter.mobile">
+                </div>
+                <div class="col-md-2 form-group" *ngIf="type">
+                    <label class="form-control-label" for="field_type">Type</label>
+                    <input type="text" id="field_type" name="type" class="form-control"
+                           [(ngModel)]="entity.filter.type">
+                </div>
+                <div class="col-md-2 form-group" *ngIf="shortName">
+                    <label class="form-control-label" for="field_shortName">Short Name</label>
+                    <input type="text" id="field_shortName" name="shortName" class="form-control"
+                           [(ngModel)]="entity.filter.shortName">
+                </div>
+                <div class="col-md-2 form-group" *ngIf="name">
+                    <label class="form-control-label" for="field_name">Name</label>
+                    <input type="text" id="field_name" name="name" class="form-control"
+                           [(ngModel)]="entity.filter.name">
+                </div>
+
+                <div class="col-md-2" *ngIf="userType">
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_userType">User Type</label>
+                        <select class="form-control" id="field_userType" name="userType" [(ngModel)]="filter.userType">
+                            <option [ngValue]="null" selected></option>
+                            <option [ngValue]="userType" *ngFor="let userType of userTypes">{{ userType }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2" *ngIf="transferType">
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_transferType">Transfer Type</label>
+                        <select class="form-control" id="field_transferType" name="status"
+                                [(ngModel)]="filter.transferType">
+                            <option [ngValue]="null" selected></option>
+                            <option [ngValue]="transferType" *ngFor="let transferType of transferTypes">{{ transferType
+                                }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2 form-group" *ngIf="isRequired">
+                    <label class="form-control-label" for="field_isRequired">Is Required</label>
+                    <select class="form-control" id="field_isRequired" name="isRequired"
+                            [(ngModel)]="filter.isRequired">
+                        <option [ngValue]="null" selected></option>
+                        <option value="false">NO</option>
+                        <option value="true">YES</option>
+                    </select>
+                </div>
+                <div class="col-md-3 form-group" *ngIf="successEmailBody">
+                    <label class="form-control-label" for="field_successEmailBody">Success Email Body</label>
+                    <input type="text" id="field_successEmailBody" name="successEmailBody" class="form-control"
+                           [(ngModel)]="filter.successEmailBody">
+                </div>
+                <div class="col-md-3 form-group" *ngIf="rejectEmailBody">
+                    <label class="form-control-label" for="field_rejectEmailBody">Rejection Email Body</label>
+                    <input type="text" id="field_rejectEmailBody" name="rejectEmailBody" class="form-control"
+                           [(ngModel)]="filter.rejectEmailBody">
+                </div>
+                <div class="col-md-3 form-group" *ngIf="sigUrl">
+                    <label class="form-control-label" for="field_sigUrl">Signature URL </label>
+                    <input type="text" id="field_sigUrl" name="sigUrl" class="form-control" [(ngModel)]="filter.sigUrl">
+                </div>
+                <div class="col-md-2 form-group" *ngIf="replyTimeout">
+                    <label class="form-control-label" for="field_replyTimeout">Reply Timeout </label>
+                    <input type="number" id="field_replyTimeout" name="sigUrl" class="form-control"
+                           [(ngModel)]="filter.replyTimeout">
+                </div>
+                <div class="col-md-2 form-group" *ngIf="nbkAccountLength">
+                    <label class="form-control-label" for="field_nbkAccountLength">NBK Length </label>
+                    <input type="number" id="field_nbkAccountLength" name="nbkAccountLength" class="form-control"
+                           [(ngModel)]="filter.nbkAccountLength">
+                </div>
+                <div class="col-md-2 form-group" *ngIf="maxRetries">
+                    <label class="form-control-label" for="field_maxRetries">Max Retries </label>
+                    <input type="number" id="field_maxRetries" name="maxRetries" class="form-control"
+                           [(ngModel)]="filter.maxRetries">
+                </div>
+                <div class="col-md-2 form-group" *ngIf="duplicateDays">
+                    <label class="form-control-label" for="field_duplicateDays">Duplicate Days</label>
+                    <input type="text" id="field_duplicateDays" name="duplicateDays" class="form-control"
+                           [(ngModel)]="filter.duplicateDays">
+                </div>
+                <div class="col-md-2 form-group" *ngIf="branchIndex">
+                    <label class="form-control-label" for="field_branchIndex">Branch Index</label>
+                    <input type="number" id="field_branchIndex" name="branchIndex" class="form-control"
+                           [(ngModel)]="filter.branchIndex">
+                </div>
+
+                <div class="col-md-2 form-group" *ngIf="enabled">
+                    <label class="form-control-label" for="field_enabled">Enabled</label>
+                    <select class="form-control" id="field_enabled" name="enabled" [(ngModel)]="entity.filter.enabled">
+                        <option [ngValue]="null" selected></option>
+                        <option value="false">NO</option>
+                        <option value="true">YES</option>
+                    </select>
+                </div>
+                <div class="col-md-2 form-group" *ngIf="enable">
+                    <label class="form-control-label" for="field_enable">Enable</label>
+                    <select class="form-control" id="field_enable" name="enable" [(ngModel)]="entity.filter.enable">
+                        <option [ngValue]="null" selected></option>
+                        <option value="false">NO</option>
+                        <option value="true">YES</option>
+                    </select>
+                </div>
+                <div class="col-md-3" *ngIf="status">
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_status">Status</label>
+                        <select class="form-control" id="field_status" name="status" [(ngModel)]="entity.filter.status">
+                            <option [ngValue]="null" selected></option>
+                            <option [ngValue]="status" *ngFor="let status of statuses">{{ status }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group w-100 mt-3">
+                        <button class="input-group-append btn btn-info" (click)="entity.search()">
+                            <fa-icon icon="search"></fa-icon>
+                        </button>
+
+                        <button class="input-group-append btn btn-danger" (click)="entity.clearSearch()">
+                            <fa-icon icon="trash-alt"></fa-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

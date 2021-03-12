@@ -1,0 +1,1276 @@
+openapi: "3.0.0"
+servers:
+- url: http://localhost:8080
+info:
+  description: Eforms service API
+  version: "1.0.0"
+  title: Eforms service API
+paths:
+  /banks:
+    post:
+      summary: Perform bank post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components/bank.yaml#/components/schemas/BankRequest'
+
+      responses:
+        '200':
+          description: created ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/bank.yaml#/components/schemas/BankResponse'
+    get:
+      summary: Get Banks
+      parameters:
+      - name: filterRequest
+        in: query
+        schema:
+          $ref: './components/bank.yaml#/components/schemas/BankFilterRequest'
+      - name: pageable
+        in: query
+        schema:
+          $ref: './commons/common.yaml#/components/schemas/PageableModel'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/bank.yaml#/components/schemas/BankResponsePage'
+
+  /banks/{uuid}:
+    get:
+      summary: Get Bank by UUID
+      parameters:
+      - name: uuid
+        in: path
+        description: Bank UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/bank.yaml#/components/schemas/BankResponse'
+
+    put:
+      summary: Repair Banks
+      parameters:
+      - name: uuid
+        in: path
+        description: Bank UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components/bank.yaml#/components/schemas/BankRequest'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/bank.yaml#/components/schemas/BankResponse'
+
+  /banks/{uuid}/{action}:
+    post:
+      summary: Verify Bank action
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: action
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/bank.yaml#/components/schemas/BankResponse'
+
+  /system-params:
+    get:
+      summary: Get System Paramters
+      parameters:
+      - name: filterRequest
+        in: query
+        schema:
+          $ref: './components/system-parameter.yaml#/components/schemas/SystemParameterFilterRequest'
+      - name: pageable
+        in: query
+        schema:
+          $ref: './commons/common.yaml#/components/schemas/PageableModel'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/system-parameter.yaml#/components/schemas/SystemParameterResponsePage'
+  /system-params/{uuid}:
+    get:
+      summary: Get System Parameter
+      parameters:
+      - name: uuid
+        in: path
+        description: System Parameter UUID
+        required: true
+        schema:
+          type: string
+          pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/system-parameter.yaml#/components/schemas/SystemParameterResponse'
+
+    put:
+      summary: Get System Parameter
+      parameters:
+      - name: uuid
+        in: path
+        description: System Parameter UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components/system-parameter.yaml#/components/schemas/SystemParameterRequest'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/system-parameter.yaml#/components/schemas/SystemParameterResponse'
+  /system-params/{uuid}/{action}:
+    post:
+      summary: Get System Parameter
+      parameters:
+      - name: uuid
+        in: path
+        description: System Parameter UUID
+        required: true
+        schema:
+          type: string
+          pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+      - name: action
+        in: path
+        description: System Parameter verify action
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/system-parameter.yaml#/components/schemas/SystemParameterResponse'
+
+
+  /transfer-purpose:
+    get:
+      summary: Get Transfer Purposes
+      parameters:
+      - name: filterRequest
+        in: query
+        schema:
+          $ref: './components/transfer-purpose.yaml#/components/schemas/TransferPurposeFilterRequest'
+      - name: pageable
+        in: query
+        schema:
+          $ref: './commons/common.yaml#/components/schemas/PageableModel'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/transfer-purpose.yaml#/components/schemas/TransferPurposeResponsePage'
+
+    post:
+      summary: Perform Transfer Purpose post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components/transfer-purpose.yaml#/components/schemas/TransferPurposeRequest'
+
+      responses:
+        '200':
+          description: created ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/transfer-purpose.yaml#/components/schemas/TransferPurposeResponse'
+  /transfer-purpose/{uuid}:
+    get:
+      summary: Get Transfer Purpose by UUID
+      parameters:
+      - name: uuid
+        in: path
+        description: Transfer Purpose UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/transfer-purpose.yaml#/components/schemas/TransferPurposeResponse'
+
+    put:
+      summary: Repair Transfer Purpose
+      parameters:
+      - name: uuid
+        in: path
+        description: Transfer Purpose UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components/transfer-purpose.yaml#/components/schemas/TransferPurposeRequest'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/transfer-purpose.yaml#/components/schemas/TransferPurposeResponse'
+  /transfer-purpose/{uuid}/{action}:
+    post:
+      summary: Verify Transfer Purpose
+      parameters:
+      - name: uuid
+        in: path
+        description: Transfer Purpose UUID
+        required: true
+        schema:
+          type: string
+      - name: action
+        in: path
+        description: Transfer Purpose verify action
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/transfer-purpose.yaml#/components/schemas/TransferPurposeResponse'
+
+
+  /rejection-reason:
+    post:
+      summary: Get All Rejection Reasons
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components/rejection-reason.yaml#/components/schemas/RejectionReasonRequest'
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: './components/rejection-reason.yaml#/components/schemas/RejectionReasonResponse'
+    put:
+      summary: Update Rejection Reason
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components/rejection-reason.yaml#/components/schemas/RejectionReasonRequest'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/rejection-reason.yaml#/components/schemas/RejectionReasonResponse'
+
+    get:
+      summary: Get All Rejection Reasons
+      parameters:
+      - name: filterRequest
+        in: query
+        schema:
+          $ref: './components/rejection-reason.yaml#/components/schemas/RejectionReasonFilterRequest'
+      - name: pageable
+        in: query
+        schema:
+          $ref: './commons/common.yaml#/components/schemas/PageableModel'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/rejection-reason.yaml#/components/schemas/RejectionReasonResponsePage'
+  /rejection-reason/{uuid}:
+    get:
+      summary: Get Rejection Reason
+      parameters:
+      - name: uuid
+        in: path
+        description: System Parameter UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/rejection-reason.yaml#/components/schemas/RejectionReasonResponse'
+
+  /rejection-reason/{uuid}/{action}:
+    post:
+      summary: Action on Rejection Reason
+      parameters:
+      - name: uuid
+        in: path
+        description: Rejection Reason UUID
+        required: true
+        schema:
+          type: string
+      - name: action
+        in: path
+        description: Rejection Reason verify action
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/rejection-reason.yaml#/components/schemas/RejectionReasonResponse'
+  /cbs-rejection-reason:
+    post:
+      summary: Get All Cbs Rejection Reasons
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components/cbs-rejection-reason.yaml#/components/schemas/CbsRejectionReasonRequest'
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: './components/cbs-rejection-reason.yaml#/components/schemas/CbsRejectionReasonResponse'
+    put:
+      summary: Update Cbs Rejection Reason
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components/cbs-rejection-reason.yaml#/components/schemas/CbsRejectionReasonRequest'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/cbs-rejection-reason.yaml#/components/schemas/CbsRejectionReasonResponse'
+
+    get:
+      summary: Get All Cbs Rejection Reasons
+      parameters:
+      - name: filterRequest
+        in: query
+        schema:
+          $ref: './components/cbs-rejection-reason.yaml#/components/schemas/CbsRejectionReasonFilterRequest'
+      - name: pageable
+        in: query
+        schema:
+          $ref: './commons/common.yaml#/components/schemas/PageableModel'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/cbs-rejection-reason.yaml#/components/schemas/CbsRejectionReasonResponsePage'
+  /cbs-rejection-reason/{uuid}:
+    get:
+      summary: Get Cbs Rejection Reason
+      parameters:
+      - name: uuid
+        in: path
+        description: System Parameter UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/cbs-rejection-reason.yaml#/components/schemas/CbsRejectionReasonResponse'
+
+  /cbs-rejection-reason/{uuid}/{action}:
+    post:
+      summary: Action on Cbs Rejection Reason
+      parameters:
+      - name: uuid
+        in: path
+        description: Rejection Reason UUID
+        required: true
+        schema:
+          type: string
+      - name: action
+        in: path
+        description: Rejection Reason verify action
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/cbs-rejection-reason.yaml#/components/schemas/CbsRejectionReasonResponse'
+
+
+  /branch:
+    get:
+      summary: Get Branches
+      parameters:
+      - name: filterRequest
+        in: query
+        schema:
+          $ref: './components/branch.yaml#/components/schemas/BranchFilterRequest'
+      - name: pageable
+        in: query
+        schema:
+          $ref: './commons/common.yaml#/components/schemas/PageableModel'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/branch.yaml#/components/schemas/BranchResponsePage'
+
+
+    post:
+      summary: Perform Branch Create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components/branch.yaml#/components/schemas/BranchRequest'
+
+      responses:
+        '200':
+          description: created ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/branch.yaml#/components/schemas/BranchResponse'
+
+
+  /branch/{uuid}:
+    get:
+      summary: Get Branch by UUID
+      parameters:
+      - name: uuid
+        in: path
+        description: Branch UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/branch.yaml#/components/schemas/BranchResponse'
+
+    put:
+      summary: Repair Branch
+      parameters:
+      - name: uuid
+        in: path
+        description: Transfer Purpose UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components/branch.yaml#/components/schemas/BranchRequest'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/branch.yaml#/components/schemas/BranchResponse'
+
+  /branch/{uuid}/{action}:
+    post:
+      summary: Verify Branch Update
+      parameters:
+      - name: uuid
+        in: path
+        description: Transfer Purpose UUID
+        required: true
+        schema:
+          type: string
+      - name: action
+        in: path
+        description: Branch update action
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/branch.yaml#/components/schemas/BranchResponse'
+
+  /currency:
+    get:
+      summary: Get all defined Currencies
+      parameters:
+      - name: filterRequest
+        in: query
+        schema:
+          $ref: './components/currency.yaml#/components/schemas/CurrencyFilterRequest'
+      - name: pageable
+        in: query
+        schema:
+          $ref: './commons/common.yaml#/components/schemas/PageableModel'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/currency.yaml#/components/schemas/CurrencyResponsePage'
+
+    post:
+      summary: Perform Currency post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components/currency.yaml#/components/schemas/CurrencyRequest'
+
+      responses:
+        '200':
+          description: created ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/currency.yaml#/components/schemas/CurrencyResponse'
+
+  /currency/{uuid}:
+    get:
+      summary: Get Currency by UUID
+      parameters:
+      - name: uuid
+        in: path
+        description: Currency UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/currency.yaml#/components/schemas/CurrencyResponse'
+
+    put:
+      summary: Repair Currency
+      parameters:
+      - name: uuid
+        in: path
+        description: Currency UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components/currency.yaml#/components/schemas/CurrencyRequest'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/currency.yaml#/components/schemas/CurrencyResponse'
+
+  /currency/{uuid}/{action}:
+    post:
+      summary: Verify Currency action
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: action
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/currency.yaml#/components/schemas/CurrencyResponse'
+  /verification-item:
+    post:
+      summary: Get All Verification Items
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components/verification-item.yaml#/components/schemas/VerificationItemRequest'
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: './components/verification-item.yaml#/components/schemas/VerificationItemResponse'
+    put:
+      summary: Update Verification Item
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components/verification-item.yaml#/components/schemas/VerificationItemRequest'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/verification-item.yaml#/components/schemas/VerificationItemResponse'
+
+    get:
+      summary: Get All Verification Items
+      parameters:
+      - name: filterRequest
+        in: query
+        schema:
+          $ref: './components/verification-item.yaml#/components/schemas/VerificationItemFilterRequest'
+      - name: pageable
+        in: query
+        schema:
+          $ref: './commons/common.yaml#/components/schemas/PageableModel'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/verification-item.yaml#/components/schemas/VerificationItemResponsePage'
+  /verification-item/{uuid}:
+    get:
+      summary: Get Verification Item
+      parameters:
+      - name: uuid
+        in: path
+        description: Verification Item UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/verification-item.yaml#/components/schemas/VerificationItemResponse'
+
+  /verification-item/{uuid}/{action}:
+    post:
+      summary: Action on Verification Item
+      parameters:
+      - name: uuid
+        in: path
+        description: Verification Item UUID
+        required: true
+        schema:
+          type: string
+      - name: action
+        in: path
+        description: Verification Item verify action
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/verification-item.yaml#/components/schemas/VerificationItemResponse'
+
+
+  /account-type:
+    get:
+      summary: Get all Account type
+      parameters:
+      - name: filterRequest
+        in: query
+        schema:
+          $ref: './components/account-type.yaml#/components/schemas/AccountTypeFilterRequest'
+      - name: pageable
+        in: query
+        schema:
+          $ref: './commons/common.yaml#/components/schemas/PageableModel'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/account-type.yaml#/components/schemas/AccountTypeResponsePage'
+
+    post:
+      summary: Perform Account type post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components/account-type.yaml#/components/schemas/AccountTypeRequest'
+
+      responses:
+        '200':
+          description: created ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/account-type.yaml#/components/schemas/AccountTypeResponse'
+
+  /account-type/{uuid}:
+    get:
+      summary: Get Account type by UUID
+      parameters:
+      - name: uuid
+        in: path
+        description: Account type UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/account-type.yaml#/components/schemas/AccountTypeResponse'
+
+    put:
+      summary: Repair Account type
+      parameters:
+      - name: uuid
+        in: path
+        description: Account type UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components/account-type.yaml#/components/schemas/AccountTypeRequest'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/account-type.yaml#/components/schemas/AccountTypeResponse'
+
+  /account-type/{uuid}/{action}:
+    post:
+      summary: Verify Account Type action
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: action
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/account-type.yaml#/components/schemas/AccountTypeResponse'
+
+  /corporate:
+    get:
+      summary: Get all Corporates
+      parameters:
+      - name: filterRequest
+        in: query
+        schema:
+          $ref: './components/corporate.yaml#/components/schemas/CorporateFilterRequest'
+      - name: pageable
+        in: query
+        schema:
+          $ref: './commons/common.yaml#/components/schemas/PageableModel'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/corporate.yaml#/components/schemas/CorporateResponsePage'
+
+    post:
+      summary: Perform Corporate post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components/corporate.yaml#/components/schemas/CorporateRequest'
+
+      responses:
+        '200':
+          description: created ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/corporate.yaml#/components/schemas/CorporateResponse'
+
+  /corporate/{uuid}:
+    get:
+      summary: Get Corporate by UUID
+      parameters:
+      - name: uuid
+        in: path
+        description: Corporate UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/corporate.yaml#/components/schemas/CorporateResponse'
+
+    put:
+      summary: Repair Corporate
+      parameters:
+      - name: uuid
+        in: path
+        description: Corporate UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components/corporate.yaml#/components/schemas/CorporateRequest'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/corporate.yaml#/components/schemas/CorporateResponse'
+
+  /corporate/{uuid}/{action}:
+    post:
+      summary: Verify Corporate action
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: action
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/corporate.yaml#/components/schemas/CorporateResponse'
+
+  /system-user:
+    get:
+      summary: Get all System users
+      parameters:
+      - name: filterRequest
+        in: query
+        schema:
+          $ref: './components/system-user.yaml#/components/schemas/SystemUserFilterRequest'
+      - name: pageable
+        in: query
+        schema:
+          $ref: './commons/common.yaml#/components/schemas/PageableModel'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/system-user.yaml#/components/schemas/SystemUserResponsePage'
+
+    post:
+      summary: Perform System user post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components/system-user.yaml#/components/schemas/SystemUserRequest'
+
+      responses:
+        '200':
+          description: created ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/system-user.yaml#/components/schemas/SystemUserResponse'
+
+  /system-user/{uuid}:
+    get:
+      summary: Get System user by UUID
+      parameters:
+      - name: uuid
+        in: path
+        description: System user UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/system-user.yaml#/components/schemas/SystemUserResponse'
+
+    put:
+      summary: Repair System user
+      parameters:
+      - name: uuid
+        in: path
+        description: System user UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components/system-user.yaml#/components/schemas/SystemUserRequest'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/system-user.yaml#/components/schemas/SystemUserResponse'
+
+  /system-user/{uuid}/{action}:
+    post:
+      summary: Verify System user action
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: action
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/system-user.yaml#/components/schemas/SystemUserResponse'
+
+  /corporate-token:
+    get:
+      summary: Get all Corporate tokens
+      parameters:
+      - name: filterRequest
+        in: query
+        schema:
+          $ref: './components/corporate-token.yaml#/components/schemas/CorporateTokenFilterRequest'
+      - name: pageable
+        in: query
+        schema:
+          $ref: './commons/common.yaml#/components/schemas/PageableModel'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/corporate-token.yaml#/components/schemas/CorporateTokenResponsePage'
+
+    post:
+      summary: Perform Corporate Token post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components/corporate-token.yaml#/components/schemas/CorporateTokenRequest'
+
+      responses:
+        '200':
+          description: created ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/corporate-token.yaml#/components/schemas/CorporateTokenResponse'
+
+  /corporate-token/{uuid}:
+    get:
+      summary: Get Corporate Token by UUID
+      parameters:
+      - name: uuid
+        in: path
+        description: Corporate Token UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/corporate-token.yaml#/components/schemas/CorporateTokenResponse'
+
+    put:
+      summary: Repair Cororate Token
+      parameters:
+      - name: uuid
+        in: path
+        description: Corporate Token UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components/corporate-token.yaml#/components/schemas/CorporateTokenRequest'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/corporate-token.yaml#/components/schemas/CorporateTokenResponse'
+
+  /corporate-token/{uuid}/{action}:
+    post:
+      summary: Verify Corporate Token action
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: action
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/corporate-token.yaml#/components/schemas/CorporateTokenResponse'
+
+  /internal-transfer:
+    post:
+      summary: Perform Internal Transfer post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components/internal-transfer.yaml#/components/schemas/InternalTransferRequest'
+      responses:
+        '200':
+          description: ok created
+          content:
+            application/json:
+              schema:
+                $ref: './components/internal-transfer.yaml#/components/schemas/InternalTransferResponse'
+
+    get:
+      summary: Get All Internal Transfers
+      parameters:
+      - name: filterRequest
+        in: query
+        schema:
+          $ref: './components/internal-transfer.yaml#/components/schemas/InternalTransferFilterRequest'
+      - name: pageable
+        in: query
+        schema:
+          $ref: './commons/common.yaml#/components/schemas/PageableModel'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/internal-transfer.yaml#/components/schemas/InternalTransferResponsePage'
+  /internal-transfer/{uuid}:
+    get:
+      summary: Get Internal Transfer Item
+      parameters:
+      - name: uuid
+        in: path
+        description: Internal Transfer Item UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/internal-transfer.yaml#/components/schemas/InternalTransferResponse'
+    post:
+      summary: Perform action on internal transfer
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components/internal-transfer.yaml#/components/schemas/InternalTransferRequest'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/internal-transfer.yaml#/components/schemas/InternalTransferResponse'
+
+    put:
+      summary: Update Internal Transfer
+      parameters:
+      - name: uuid
+        in: path
+        description: Internal Transfer UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './components/internal-transfer.yaml#/components/schemas/InternalTransferRequest'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/internal-transfer.yaml#/components/schemas/InternalTransferResponse'
+
+  /internal-transfer/{uuid}/{action}:
+    post:
+      summary: Perform action on internal transfer
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: action
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: './components/internal-transfer.yaml#/components/schemas/InternalTransferResponse'

@@ -1,0 +1,37 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "eforms": {
+      "root": "",
+      "sourceRoot": "src/main/webapp",
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "skipTests": true,
+          "style": "scss"
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
+      "prefix": "efo",
+      "architect": {}
+    }
+  },
+  "defaultProject": "eforms",
+  "cli": {
+    "packageManager": "npm",
+    "analytics": "acbb280f-1c70-45d0-91ad-2fb4723981a1"
+  }
+}

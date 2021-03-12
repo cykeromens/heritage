@@ -1,0 +1,24 @@
+<form *ngIf="uuid" name="verifyForm" (ngSubmit)="confirm(uuid, action)">
+    <div class="modal-header">
+        <h4 class="modal-title">Verify Action</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">
+            x
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <efo-alert-error></efo-alert-error>
+        <p>Confirm you want to <strong>{{action}}</strong> this request?</p>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+            <fa-icon icon="pencil-alt"></fa-icon>
+            <span>Cancel</span>
+        </button>
+        <button id="verify-action" type="submit" class="btn btn-primary">
+            <fa-icon icon="pencil-alt"></fa-icon>
+            <span>Confirm</span>
+        </button>
+    </div>
+</form>

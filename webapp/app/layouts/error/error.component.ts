@@ -1,0 +1,38 @@
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs';
+
+@Component({
+    selector: 'efo-error',
+    templateUrl: './error.component.html'
+})
+export class ErrorComponent implements OnInit, OnDestroy {
+    errorMessage?: string;
+    errorKey?: string;
+    langChangeSubscription?: Subscription;
+
+    constructor(private route: ActivatedRoute) {
+    }
+
+    ngOnInit(): void {
+        this.route.data.subscribe(routeData => {
+            if (routeData.errorMessage) {
+                this.errorKey = routeData.errorMessage;
+                this.getErrorMessageTranslation();
+            }
+        });
+    }
+
+    ngOnDestroy(): void {
+        if (this.langChangeSubscription) {
+            this.langChangeSubscription.unsubscribe();
+        }
+    }
+
+    private getErrorMessageTranslation(): void {
+        this.errorMessage = '';
+        if (this.errorKey) {
+            // this.translateService.get(this.errorKey).subscribe(translatedErrorMessage => (this.errorMessage = translatedErrorMessage));
+        }
+    }
+}

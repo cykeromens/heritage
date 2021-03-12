@@ -1,0 +1,163 @@
+components:
+  schemas:
+    Course:
+      title: IntendingCourse
+      type: object
+      properties:
+        typeOfSchool:
+          $ref: '#/components/schemas/SchoolType'
+        schoolName:
+          type: string
+          example: "FUTO"
+        course:
+          type: string
+          example: "PHYSICS"
+
+    Certificate:
+      title: Certificate
+      type: object
+      properties:
+        name:
+          type: string
+        image:
+          type: string
+
+    Subject:
+      title: Subject
+      type: object
+      properties:
+        code:
+          type: string
+          example: "PHY"
+        name:
+          type: string
+          example: "PHYSICS"
+
+    School:
+      title: SchoolInformation
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Community Primary School, OP1"
+        address:
+          type: string
+          example: "Umumbiri Oparanadim"
+        yearOfGraduation:
+          type: string
+          example: "2005"
+        certificate:
+          type: array
+          items:
+            $ref: '#/components/schemas/Certificate'
+      required:
+      - name
+      - address
+      - yearOfGraduation
+
+    BioData:
+      title: BioData
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: "Cyp"
+        middleName:
+          type: string
+          example: "Ody"
+        lastName:
+          type: string
+          example: "Omens"
+        kindred:
+          type: string
+          example: "Umumbirimba"
+        village:
+          type: string
+          example: "Awibe"
+        community:
+          type: string
+          example: "Umumbiri"
+        town:
+          type: string
+          example: "Oparanadim"
+        lga:
+          type: string
+          example: "Ahiazu Mbaise"
+        state:
+          type: string
+          example: "Imo"
+        dob:
+          type: string
+          example: "2000-01-01"
+        disabled:
+          type: boolean
+          example: false
+        maritalStatus:
+          type: string
+          enum:
+          - SINGLE
+          - MARRIED
+          - DIVORCED
+          example: SINGLE
+        sex:
+          type: string
+          enum:
+          - MALE
+          - FEMALE
+          example: MALE
+    AccountStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - DISABLED
+      - LOCKED
+      - INACTIVE
+    SchoolType:
+      type: string
+      enum:
+      - UNIVERSITY
+      - POLYTECHNIC
+      - COLLEGE_OF_EDUCATION
+    WorkflowStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - DISABLED
+      - WAITING_REPAIR
+      - WAITING_VERIFICATION
+    WorkflowActionResponse:
+      title: WorkflowActionResponse
+      type: object
+      properties:
+        action:
+          type: string
+        href:
+          type: string
+    PageModel:
+      title: PageModel
+      type: object
+      properties:
+        totalPages:
+          type: integer
+        totalElements:
+          type: long
+        size:
+          type: integer
+        pageNumber:
+          type: integer
+
+    PageableModel:
+      title: PageableMode
+      type: object
+      properties:
+        page:
+          type: integer
+        size:
+          type: integer
+        sort:
+          type: array
+          items:
+            type: string
+
+
+
